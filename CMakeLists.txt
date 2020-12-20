@@ -33,25 +33,31 @@ endif()
 set(CMAKE_BINARY_DIR "/bin")
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}${CMAKE_BINARY_DIR})
 
-# Verify that the QT_HOME environment variable is set.
-if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-    set(QT_HOME $ENV{QT_MINGW_HOME})
-elseif (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-    set(QT_HOME $ENV{QT_MSVC_HOME})
-endif()
-
-if(${QT_HOME} STREQUAL "")
-    message(FATAL_ERROR "QT_[COMPILER]_HOME is not set!")
-else()
-message(STATUS "Using Qt from: " ${QT_HOME})
-endif()
-
 # Handle Qt specific files automatically
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
-# Qt CMake
-set(CMAKE_PREFIX_PATH ${QT_HOME}/lib/cmake)
+# If CMAKE_PREFIX_PATH is not set, we assume that we are running
+# in a Command Prompt because Qt Creator's kits automatically set it.
+if(NOT CMAKE_PREFIX_PATH)
+    if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+        set(QT_HOME $ENV{QT_MINGW_HOME})
+    elseif (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+        set(QT_HOME $ENV{QT_MSVC_HOME})
+    endif()
+
+    # Verify that the QT_XXX_HOME environment variable is set.
+    if(${QT_HOME} STREQUAL "")
+        if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+            message(FATAL_ERROR "QT_MINGW_HOME is not set!")
+        elseif (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+            message(FATAL_ERROR "QT_MSVC_HOME is not set!")
+        endif()
+    endif()
+
+    message(STATUS "Using Qt from: " ${QT_HOME})
+    set(CMAKE_PREFIX_PATH ${QT_HOME}/lib/cmake)
+endif()
 
 add_subdirectory(src)

@@ -21,5 +21,7 @@ Create and set *QT_MSVC_HOME* Windows environment variable to point to: *e.g. C:
 Create and set *VC_HOME* Windows environment variable to point to your Visual Studio's *vcvarsall.bat* location: *e.g. C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build*
 
 ## Qt Creator
+When using Qt Creator *QT_MINGW_HOME* and *QT_MSVC_HOME* are ignored. Qt Creator's kits automatically set their *CMAKE_PREFIX_PATH*.
+
 Qt Creator's default build directory is quite a awful.
 You can change it inside *Tools -> Options... -> Build & Run -> Default Build Properties* to: *e.g. `%{JS: Util.asciify("build/%{CurrentBuild:Type}")}`*

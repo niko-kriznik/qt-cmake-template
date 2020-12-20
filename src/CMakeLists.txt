@@ -27,7 +27,5 @@ add_executable(
     ${QT_RESOURCES}
 )
 
-#target_include_directories(${PROJECT} PRIVATE "cpp/")
-#target_include_directories(${PROJECT} PRIVATE ${Qt5_INCLUDE_DIRS})
-
+target_include_directories(${PROJECT} PRIVATE "cpp/")
 target_link_libraries(${PROJECT} PRIVATE Qt5::Core Qt5::Widgets)
