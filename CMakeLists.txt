@@ -29,7 +29,7 @@ elseif (build_type STREQUAL "release")
     message(STATUS "CMAKE_CXX_FLAGS: " ${CMAKE_CXX_FLAGS} " " ${CMAKE_CXX_FLAGS_RELEASE})
 endif()
 
-# Set the binary location
+# Set the binary output location
 set(CMAKE_BINARY_DIR "/bin")
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}${CMAKE_BINARY_DIR})
 
@@ -58,6 +58,10 @@ if(NOT CMAKE_PREFIX_PATH)
 
     message(STATUS "Using Qt from: " ${QT_HOME})
     set(CMAKE_PREFIX_PATH ${QT_HOME}/lib/cmake)
+else()
+    # Suppresses "Manually-specified variables were not used by the
+    # project: QT_QMAKE_EXECUTABLE" warning inside Qt Creator
+    set(ignoreMe "${QT_QMAKE_EXECUTABLE}")
 endif()
 
 add_subdirectory(src)
