@@ -17,7 +17,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_button_clicked()
 {
-    if (m_ui->image->pixmap(Qt::ReturnByValue).isNull() && !m_image.isNull()) {
+    if (m_ui->image->pixmap() == nullptr && !m_image.isNull()) {
         m_ui->image->setPixmap(m_image);
         m_ui->image->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
     }
