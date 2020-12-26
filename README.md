@@ -9,10 +9,10 @@ You can change it inside *Tools -> Options... -> Build & Run -> Default Build Pr
 
 ## Command line
 ### Compiling
-Run *build_mingw.bat* or *build_msvc.bat* to compile the project. These automatically set up their respective build environments, so calling *set_mingw_env.bat* or *set_msvc_env.bat* beforehand is not necessary.
+Run *mingw_build.bat* or *msvc_build.bat* to compile the project. These automatically set up their respective build environments, so calling *mingw_env.bat* or *msvc_env.bat* beforehand is not necessary.
 
 Any arguments passed to the batch file will get forwarded to CMake <br/>
-(*e.g. build_mingw.bat -DCMAKE_BUILD_TYPE=RELEASE*).
+(*e.g. mingw_build.bat -DCMAKE_BUILD_TYPE=RELEASE*).
 
 ### MinGW
 Create and set *QT_MINGW_HOME* Windows environment variable to point to: <br/>
