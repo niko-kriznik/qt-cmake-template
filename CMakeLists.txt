@@ -1,14 +1,15 @@
 cmake_minimum_required(VERSION 3.15.0)
 
 set(PROJECT "QtCMakeExample")
-project(${PROJECT})
+project(${PROJECT} CXX)
 
 # Set the C++ standard
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-if(NOT CMAKE_BUILD_TYPE)
-    set(CMAKE_BUILD_TYPE "release")
+# Set default build to release
+if (NOT CMAKE_BUILD_TYPE)
+    set(CMAKE_BUILD_TYPE "release" CACHE STRING "Choose Release or Debug" FORCE)
 endif()
 
 # Set the compiler flags
@@ -40,7 +41,7 @@ set(CMAKE_AUTORCC ON)
 
 # If CMAKE_PREFIX_PATH is not set, we assume that we are running
 # in a Command Prompt because Qt Creator's kits automatically set it.
-if(NOT CMAKE_PREFIX_PATH)
+if (NOT CMAKE_PREFIX_PATH)
     if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
         set(QT_HOME $ENV{QT_MINGW_HOME})
     elseif (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
@@ -48,7 +49,7 @@ if(NOT CMAKE_PREFIX_PATH)
     endif()
 
     # Verify that the QT_XXX_HOME environment variable is set.
-    if(${QT_HOME} STREQUAL "")
+    if (${QT_HOME} STREQUAL "")
         if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
             message(FATAL_ERROR "QT_MINGW_HOME is not set!")
         elseif (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
